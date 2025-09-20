@@ -2,7 +2,7 @@
 const config = {
   // MongoDB Atlas connection string (replace with your actual connection string)
   mongodb: {
-    uri: process.env.MONGODB_URI || 'mongodb+srv://demo:demo123@cluster0.mongodb.net/wms_db?retryWrites=true&w=majority'
+    uri: process.env.MONGODB_URI || 'mongodb+srv://kishanroy1001_db_user:mK4DGOqhwRYdZziQ@wastemanage.rrbwdvl.mongodb.net/?retryWrites=true&w=majority&appName=wastemanage'
   },
 
   // JWT configuration
@@ -18,7 +18,7 @@ const config = {
 
   // CORS configuration
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173'
+    origin: process.env.FRONTEND_URL || 'http://localhost:5174'
   }
 };
 

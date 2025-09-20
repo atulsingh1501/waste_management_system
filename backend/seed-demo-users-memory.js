@@ -1,15 +1,22 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
-const config = require('./config');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
-// Connect to MongoDB Atlas
+// Start MongoDB Memory Server
+async function startMemoryDB() {
+  const mongod = await MongoMemoryServer.create();
+  const mongoUri = mongod.getUri();
+  return { mongod, mongoUri };
+}
+
+// Connect to in-memory MongoDB
 async function connectDB() {
   try {
-    const mongoUri = config.mongodb.uri;
-    console.log('Attempting to connect to MongoDB Atlas...');
+    const { mongoUri } = await startMemoryDB();
+    console.log('Attempting to connect to in-memory MongoDB...');
     await mongoose.connect(mongoUri);
-    console.log('MongoDB Atlas connected successfully');
+    console.log('In-memory MongoDB connected successfully');
     return mongoUri;
   } catch (err) {
     console.error('MongoDB connection error:', err.message);

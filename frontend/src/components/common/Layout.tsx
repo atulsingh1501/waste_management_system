@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext_backend';
 import { 
   LogOut, 
   Bell, 
@@ -21,7 +21,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, currentPage, onPageChange }: LayoutProps) {
-  const { user, logout } = useAuth();
+  const { user, signOut } = useAuth();
 
   const getNavigationItems = () => {
     const baseItems = [
@@ -121,7 +121,7 @@ export default function Layout({ children, currentPage, onPageChange }: LayoutPr
               Settings
             </button>
             <button
-              onClick={logout}
+              onClick={signOut}
               className="w-full flex items-center px-4 py-2 text-sm font-medium text-red-600 rounded-lg hover:bg-red-50"
             >
               <LogOut className="h-5 w-5 mr-3" />

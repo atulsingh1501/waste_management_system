@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./db');
+const connectDB = require('./db_memory');
 const usersRouter = require('./routes/users');
 const vehiclesRouter = require('./routes/vehicles');
 const collectionsRouter = require('./routes/collections');
@@ -12,10 +12,9 @@ const binsRouter = require('./routes/bins');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Connect to MongoDB Atlas
+// Connect to in-memory MongoDB for development
 connectDB();
 
-// CORS configuration
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true
@@ -24,7 +23,7 @@ app.use(cors({
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Backend server is running with MongoDB Atlas!');
+  res.send('Backend server is running with in-memory MongoDB!');
 });
 
 // Users API
@@ -46,7 +45,7 @@ app.use('/api/bins', authMiddleware, binsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`Using MongoDB Atlas for data storage`);
+  console.log(`Using in-memory MongoDB for development`);
 });
 
 require('dotenv').config();

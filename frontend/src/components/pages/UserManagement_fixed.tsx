@@ -12,8 +12,8 @@ import {
   MapPin
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { fetchUsers, updateUserRole } from '../../lib/api_fixed';
-import { useAuth } from '../../context/AuthContext_fixed';
+import { fetchUsers, updateUserRole } from '../../lib/api_backend';
+import { useAuth } from '../../context/AuthContext_backend';
 
 export default function UserManagement() {
   const [searchTerm, setSearchTerm] = useState('');
