@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext_backend';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
     try {
       const { error: signInError } = await signIn(loginEmail, loginPassword);
       if (signInError) {
-        setError(signInError.message);
+        setError(signInError);
       } else {
         navigate('/dashboard');
       }
@@ -147,6 +147,12 @@ const LoginForm: React.FC = () => {
           <p>Waste Management System v1.0</p>
           <p className="mt-1">Secure • Efficient • Reliable</p>
         </div>
+      </div>
+      {/* Developer Credit Fixed at Bottom */}
+      <div className="fixed bottom-2 left-0 right-0 text-center pointer-events-none z-50">
+        <span className="text-xs text-gray-400">
+          © 2024 Made with <span className="text-red-500">❤</span> by Atul
+        </span>
       </div>
     </div>
   );

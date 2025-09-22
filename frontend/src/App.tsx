@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { AuthProvider, useAuth } from './context/AuthContext_fixed';
+import { AuthProvider, useAuth } from './context/AuthContext_backend';
 import LoginForm from './components/auth/LoginForm_fixed';
+import SignUpForm from './components/auth/SignUpForm';
 import Layout from './components/common/Layout';
 import AdminDashboard from './components/dashboard/AdminDashboard';
 import StaffDashboard from './components/dashboard/StaffDashboard';
@@ -16,6 +17,7 @@ import TaskManagement from './components/pages/TaskManagement';
 function AppContent() {
   const { user, loading } = useAuth();
   const [currentPage, setCurrentPage] = useState('dashboard');
+  const [showSignUp, setShowSignUp] = useState(false);
 
   if (loading) {
     return (
@@ -31,7 +33,10 @@ function AppContent() {
   }
 
   if (!user) {
-    return <LoginForm />;
+    if (showSignUp) {
+      return <SignUpForm onSwitchToLogin={() => setShowSignUp(false)} />;
+    }
+    return <LoginForm onSwitchToSignUp={() => setShowSignUp(true)} />;
   }
 
   const renderPage = () => {

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { LogIn, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext_backend';
+import { useAuth } from '../../context/AuthContext_fixed';
 
-const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  onSwitchToSignUp: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToSignUp }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -145,6 +149,20 @@ const LoginForm: React.FC = () => {
               ))}
             </div>
           </div>
+
+          {/* Sign Up Link */}
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{' '}
+              <button
+                type="button"
+                onClick={onSwitchToSignUp}
+                className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              >
+                Create one here
+              </button>
+            </p>
+          </div>
         </div>
 
         {/* Footer */}
@@ -152,6 +170,13 @@ const LoginForm: React.FC = () => {
           <p>Waste Management System v1.0</p>
           <p className="mt-1">Secure • Efficient • Reliable</p>
         </div>
+      </div>
+
+      {/* Developer Credit Fixed at Bottom */}
+      <div className="fixed bottom-2 left-0 right-0 text-center pointer-events-none z-50">
+        <span className="text-xs text-gray-400">
+          © 2024 Made with <span className="text-red-500">❤</span> by Atul
+        </span>
       </div>
     </div>
   );

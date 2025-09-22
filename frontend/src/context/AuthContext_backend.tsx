@@ -12,6 +12,7 @@ interface AuthContextType {
   token: string | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error?: string }>;
+  signUp: (name: string, email: string, password: string, role: string, phone?: string, assignedArea?: string) => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
   isAuthenticated: boolean;
 }
@@ -78,6 +79,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const signUp = async (name: string, email: string, password: string, role: string, phone?: string, assignedArea?: string) => {
+    try {
+      setLoading(true);
+
+      const { registerUser } = await import('../lib/api_backend');
+      const response = await registerUser({ name, email, password, role, phone, assignedArea });
+
+      if (response.message === 'User registered successfully') {
+        // Auto login after successful registration
+        return await signIn(email, password);
+      } else {
+        return { error: 'Registration failed' };
+      }
+    } catch (error: any) {
+      return { error: error.message || 'Registration failed' };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const signOut = async () => {
     try {
       setLoading(true);
@@ -99,6 +120,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     token,
     loading,
     signIn,
+    signUp,
     signOut,
     isAuthenticated: !!user && !!token,
   };

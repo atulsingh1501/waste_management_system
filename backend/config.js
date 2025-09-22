@@ -2,7 +2,7 @@
 const config = {
   // MongoDB Atlas connection string (replace with your actual connection string)
   mongodb: {
-    uri: process.env.MONGODB_URI || 'mongodb+srv://kishanroy1001_db_user:mK4DGOqhwRYdZziQ@wastemanage.rrbwdvl.mongodb.net/?retryWrites=true&w=majority&appName=wastemanage'
+    uri: process.env.MONGODB_URI || 'mongodb+srv://atulsingh05540_db_user:a1t2u3l4@wms.ixcxwbi.mongodb.net/?retryWrites=true&w=majority&appName=wms'
   },
 
   // JWT configuration
